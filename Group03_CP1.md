@@ -53,16 +53,16 @@ When someone on a team that shares a server (for example a lab GPU server or a s
 **TODO:** refine this wording after interviews. Keep only what the interviewees confirm.
 
 ### Evidence from real users
-**TODO: at least 2 people outside our team.** For each, record:
+**TODO: at least 2 people outside our team** (1 of 2 done). For each, record:
 
 | | Interviewee 1 | Interviewee 2 |
 |---|---|---|
-| Who (role, what they share) | | |
-| How often they change shared settings | | |
-| Last concrete incident (what, when, cost) | | |
-| How they currently record reasons | | |
-| What they said doesn't work | | |
-| Concerns about an AI-drafted log | | |
+| Who (role, what they share) | Master's student, National Taiwan Ocean University, in a course on protein recognition models. Team of 4 sharing one GitHub repo, one training config file, and a cloud folder of experiment results. Each person owns a part (data preprocessing/embeddings, model architecture, hyperparameters/training, evaluation), but everything runs as one model. | |
+| How often they change shared settings | Almost every week; 2–3 times a day in the 1–2 weeks before a report is due. Most changed: learning rate, batch size, dropout, layer dimensions, data split. Often several people change things on different branches at once. | |
+| Last concrete incident (what, when, cost) | About 3 weeks ago an old branch scored nearly 3 points higher validation accuracy than `main`. They suspected a layer before the classification head had changed, but commits only said "update model" / "fix". It took about two evenings of checking out and diffing branches and messaging each person "did you change this?". They still could not pin down the cause (data split and learning rate also differed), had to rerun experiments (lost GPU time), with under a week to the deadline. | |
+| How they currently record reasons | Scattered: casual commit messages, occasional LINE messages ("I changed dropout to 0.3"), a Google Doc / Notion page nobody maintains. Results sometimes live only in one person's Jupyter notebook or a wandb screenshot, so it's hard to match them to a version. | |
+| What they said doesn't work | Commit messages are too brief to understand a few days later. LINE messages get buried. Nobody updates the shared doc when rushing. Notes are separate from branches and results, so they can't be mapped to "which layer in which version". "Write a reason for every change" is a rule nobody enforces, and it's awkward to nag teammates. | |
+| Concerns about an AI-drafted log | • **Accuracy:** from a diff alone the AI knows *what* changed, not *why*, and may invent a plausible reason.<br>• **Accountability:** people may stop writing real reasons; whose name is on the entry must be clear.<br>• **Human confirmation:** draft only, valid after the author reviews it; mark AI-inferred vs. author-confirmed parts.<br>• **Privacy:** code/data may involve the professor's unpublished research; unsure if it can go to an external AI.<br>• **Burden:** if fixing a long AI paragraph is more work than writing one line, nobody will use it.<br>• **Detail:** should capture which layer, old → new value, and the linked branch and experiment result. | |
 
 ### Why existing tools do not solve it
 Candidates to check during interviews (**TODO: keep only the ones users actually mention, and tie each to a quote**):
