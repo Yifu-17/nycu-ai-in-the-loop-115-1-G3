@@ -39,3 +39,15 @@ Decision: evaluate with 3 pairs of people outside our team (3 authors, 3 readers
 Why: the CP1 rubric requires target users outside the team, and "one real case with minor edits" would not convince a skeptic. The new plan measures what changes for users: whether readers find the correct reason faster than with chat search (at least 2 of 3), and whether authors accept AI drafts with minor edits (at least 9 of 12). Full plan is in Group03_CP1.md, section 4.
 Alternative rejected: testing only with our own team. We make and explain the changes ourselves, so we would be evaluating our own habits instead of a real user's.
 Led by: 吳傢澂
+
+## 2026-10-22 — Problem scope changed: shared-repo settings in research teams (replaces "shared server parameters")
+Decision: the tool targets shared experiment settings (training configs and environment variables) in a research team's GitHub repo, recording for each change what changed, who changed it, who decided, and why. This replaces the earlier scope of server parameters explained in group chat, including the project description in the 2026-09-21 AI Usage Guidelines.
+Why: both CP1 interviewees, from an NTOU course team of 4 and an NLP lab of 7, described this situation, not a shared server. Their settings live in a shared repo, and what they lost was the reason and the ownership of a change: two evenings of diffing branches plus reruns, and about one hour tracing unsynchronized environment variables. Interviewee 2 will only use the tool if it records who decided, so "Decided by" is a field that only the author fills in. Change detection now reads git diffs of the listed settings files, and chat input becomes opt-in. Details are in Group03_CP1.md, sections 2–4.
+Alternative rejected: keeping the shared-server scope. Neither interviewee described that situation, so we would have had no evidence for it.
+Led by: 吳傢澂
+
+## 2026-10-22 — Evaluation reduced to the 2 interviewees (replaces "3 pairs" from 2026-10-19)
+Decision: evaluate with our two CP1 interviewees only. Each one is the author for their own 4 setting changes and the reader for the other's 4. The threshold is now: both readers get every tool-assisted answer fully correct and answer faster than with git and chat, and at least 6 of 8 AI drafts are accepted with minor edits.
+Why: these two people are the ones we can actually reach and who already understand the problem. A plan built on a third pair we haven't found would be a claim beyond our evidence.
+Alternative rejected: 2 pairs (each interviewee plus a teammate), which would let readers search their own team's repo. We may still add teammates if both interviewees can bring one. Weakness we accept: 2 people is a very small sample, and readers search an unfamiliar repo.
+Led by: 吳傢澂
