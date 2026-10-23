@@ -25,3 +25,17 @@ Project: an automation tool that organizes server logs, capturing the reasoning 
 - Target users: our own team, since we're also the ones making and explaining these changes on the server.
 - Method: a short interview with the author right after the tool logs their change, asking if the summary is right. Planned around the CP1 checkpoint.
 - Minimum evidence threshold: one real case where the tool's summary needed only minor edits, not a rewrite.
+
+## 2026-10-19 — Current code steward: 陳繹夫
+Rotation: the steward changes weekly in the order 陳繹夫 → 吳傢澂 → 吳承霖 → 楊敦傑, so everyone serves once before CP2 and twice before CP3. Only the steward approves and merges PRs to main; when the steward authors a PR, the next steward reviews it. Each handover gets its own entry here.
+Led by: 吳傢澂
+
+## 2026-10-22 — Problem scope changed to shared experiment settings
+Decision: the tool tracks changes to training configs and environment variables in a research team's shared repo, instead of parameters on a shared server.
+Why: both interviewees (a course team at NTOU and an NLP lab at NYCU) had this problem, not the server one. What they couldn't find later was why a setting changed and who decided it.
+Led by: 吳傢澂
+
+## 2026-10-22 — Evaluation plan revised for CP1
+Decision: in Weeks 13–14, test the tool with our 2 interviewees instead of our own team.
+Why: CP1 requires testing with people outside the team, and both interviewees already have this problem in their own repos.
+Led by: 吳傢澂
