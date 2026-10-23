@@ -126,4 +126,4 @@ Two people is a small sample, so even if this works, we would still need to test
 - Branch protection on `main`: enabled
 - PR template: `.github/PULL_REQUEST_TEMPLATE.md`
 - DECISIONS.md: started, with 6 entries
-- Current code steward: 陳繹夫 (@Yifu-17), recorded in DECISIONS.md
+- Current code steward: 陳繹夫, recorded in DECISIONS.md
