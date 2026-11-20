@@ -54,3 +54,8 @@ Decision: the pipeline is split into modules with fixed hand-offs in `whychanged
 - 陳繹夫: skeleton, PR output and README
 Why: each module can be built and reviewed on its own branch, and the skeleton runs end to end before any real module is in.
 Led by: 陳繹夫
+
+## 2026-11-21 — Steward is the next person after the author
+Decision: from CP2 on, each PR's steward is the next person after its author in the order 陳繹夫 → 吳傢澂 → 吳承霖 → 楊敦傑 → 陳繹夫. That person comments on the PR, waits for the author's reply, then approves and merges.
+Why: most PRs land around the two team sessions, so a weekly steward would review almost all of them alone. Tying the steward to the PR spreads reviews evenly, and everyone is steward before CP2.
+Led by: 陳繹夫
