@@ -39,3 +39,18 @@ Led by: 吳傢澂
 Decision: in Weeks 13–14, test the tool with our 2 interviewees instead of our own team.
 Why: CP1 requires testing with people outside the team, and both interviewees already have this problem in their own repos.
 Led by: 吳傢澂
+
+## 2026-11-20 — Prototype is a Python CLI
+Decision: build the tool as a Python command line tool that runs inside the team's repo. Commands: `log` drafts and confirms reasons, `history` shows one setting's changes, `compare` shows settings that differ between two branches.
+Why: it runs on any laptop, so we can demo it in the Week 12 lab and use it in user tests without setting up CI. A table for the PR can be printed from the same code.
+Alternative rejected: a GitHub Action that comments on PRs, since it needs repo secrets and CI before anything runs.
+Led by: 陳繹夫
+
+## 2026-11-20 — CP2 work split
+Decision: the pipeline is split into modules with fixed hand-offs in `whychanged/models.py`. 陳繹夫 builds the skeleton with stub modules, then each person replaces stubs with real code.
+- 吳傢澂: settings diff parser, branch compare
+- 吳承霖: AI drafter and CLAUDE.md, prompt test suite
+- 楊敦傑: confirm step and log store, setting history
+- 陳繹夫: skeleton, PR output and README
+Why: each module can be built and reviewed on its own branch, and the skeleton runs end to end before any real module is in.
+Led by: 陳繹夫
