@@ -1,14 +1,35 @@
-"""STUB: keeps entries in memory only. Replaced by the real jsonl store."""
+"""Save and load log entries. One JSON object per line in .whychanged/log.jsonl.
+
+The log file is committed to the repo, so everyone on the team sees it.
+"""
+import json
 from pathlib import Path
 
+from .models import LogEntry
+
 LOG_DIR = ".whychanged"
-_MEMORY = []
+LOG_FILE = "log.jsonl"
 
 
-def append(entries, repo="."):
-    _MEMORY.extend(entries)
-    return Path(repo) / LOG_DIR / "(in memory)"
+def log_path(repo: str = ".") -> Path:
+    return Path(repo) / LOG_DIR / LOG_FILE
 
 
-def load(repo="."):
-    return list(_MEMORY)
+def append(entries: list[LogEntry], repo: str = ".") -> Path:
+    path = log_path(repo)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        for e in entries:
+            f.write(json.dumps(e.to_dict(), ensure_ascii=False) + "\n")
+    return path
+
+
+def load(repo: str = ".") -> list[LogEntry]:
+    path = log_path(repo)
+    if not path.exists():
+        return []
+    entries = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            entries.append(LogEntry.from_dict(json.loads(line)))
+    return entries
