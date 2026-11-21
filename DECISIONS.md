@@ -59,3 +59,8 @@ Led by: 陳繹夫
 Decision: from CP2 on, each PR's steward is the next person after its author in the order 陳繹夫 → 吳傢澂 → 吳承霖 → 楊敦傑 → 陳繹夫. That person comments on the PR, waits for the author's reply, then approves and merges.
 Why: most PRs land around the two team sessions, so a weekly steward would review almost all of them alone. Tying the steward to the PR spreads reviews evenly, and everyone is steward before CP2.
 Led by: 陳繹夫
+
+## 2026-11-21 — Walking skeleton
+Decision: kept the stubs from #10 so the whole path ran before any real code, then swapped in diff_parser, drafter and confirm/store one PR at a time (#11 to #14). history and compare stay stubs until the next slice.
+Why: every PR could be reviewed and merged on its own, and we could run the demo after each merge to see which piece broke.
+Led by: 陳繹夫

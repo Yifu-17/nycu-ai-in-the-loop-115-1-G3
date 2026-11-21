@@ -1,7 +1,7 @@
 """Command line entry point.
 
   python -m whychanged init  --watch configs/train.yaml .env.example
-  python -m whychanged log   --base main [--head HEAD] [--yes]
+  python -m whychanged log   --base main [--head HEAD] [--note-file pr.txt] [--yes]
   python -m whychanged history train.lr
   python -m whychanged compare main old-branch
 """
@@ -30,13 +30,27 @@ def cmd_init(args) -> None:
     print(f"Watching {len(args.watch)} file(s). Saved to {path}")
 
 
+def cell(text) -> str:
+    # a | or a line break inside a cell breaks the markdown table
+    return str(text).replace("|", "\\|").replace("\r", " ").replace("\n", " ")
+
+
+def as_markdown(entries) -> str:
+    lines = ["| Setting | Change | Why | Decided by | Status |", "|---|---|---|---|---|"]
+    for e in entries:
+        lines.append(f"| `{cell(e.key)}` | {cell(e.old)} → {cell(e.new)} | {cell(e.why)} "
+                     f"| {cell(e.decided_by)} | {cell(e.status)} |")
+    return "\n".join(lines)
+
+
 def cmd_log(args) -> None:
     watched = load_watched(args.repo)
     changes = diff_parser.find_changes(args.base, args.head, watched, cwd=args.repo)
     if not changes:
         print("No watched settings changed.")
         return
-    ctx = context.collect(args.base, args.head, cwd=args.repo)
+    note = Path(args.note_file).read_text(encoding="utf-8") if args.note_file else ""
+    ctx = context.collect(args.base, args.head, note=note, cwd=args.repo)
     entries = []
     for change in changes:
         draft = drafter.draft_reason(change, ctx)
@@ -51,6 +65,8 @@ def cmd_log(args) -> None:
         return
     path = store.append(entries, repo=args.repo)
     print(f"\nSaved {len(entries)} entr{'y' if len(entries) == 1 else 'ies'} to {path}")
+    if args.markdown:
+        print("\n" + as_markdown(entries))
 
 
 def cmd_history(args) -> None:
@@ -89,8 +105,10 @@ def main(argv=None) -> None:
     s = sub.add_parser("log", help="draft and confirm reasons for changed settings")
     s.add_argument("--base", default="main")
     s.add_argument("--head", default="HEAD")
+    s.add_argument("--note-file", help="text file with the PR description or chat message")
     s.add_argument("--yes", action="store_true", help="save drafts without asking")
     s.add_argument("--decided-by", default="")
+    s.add_argument("--markdown", action="store_true", help="also print a table to paste into the PR")
     s.set_defaults(func=cmd_log)
 
     s = sub.add_parser("history", help="show every logged change of one setting")
