@@ -64,3 +64,25 @@ Led by: 陳繹夫
 Decision: kept the stubs from #10 so the whole path ran before any real code, then swapped in diff_parser, drafter and confirm/store one PR at a time (#11 to #14). history and compare stay stubs until the next slice.
 Why: every PR could be reviewed and merged on its own, and we could run the demo after each merge to see which piece broke.
 Led by: 陳繹夫
+
+## 2026-11-21 — Steward record for CP2
+Each PR's steward commented, waited for the author's reply, then approved.
+- #10 skeleton by 陳繹夫, steward 吳傢澂
+- #11 diff_parser by 吳傢澂, steward 吳承霖
+- #12 drafter by 吳承霖, steward 楊敦傑
+- #13 confirm and store by 楊敦傑, steward 陳繹夫
+- #14 CLAUDE.md by 吳承霖, steward 楊敦傑
+- #16 markdown table and README by 陳繹夫, steward 吳傢澂
+Led by: 陳繹夫
+
+## 2026-11-23 — Merge plan for merge day
+Open PRs:
+- #18 `jcwu/compare` by 吳傢澂: compare two branches with logged reasons. Ready. Only touches compare.py and its test.
+- #17 `tcyang/history` by 楊敦傑: setting history and an end to end test. Ready, but its end to end test needs compare, so it only passes after #18 compare is merged. Only touches history.py and its tests.
+- #19 `clwu/prompt-tests` by 吳承霖: 12 prompt test cases and the runner. Ready only if it has real API results. Only touches files in tests/.
+
+Order: #18 compare, then #17 history, then #19 prompt-tests. history's end to end test runs compare, so compare goes first. prompt-tests only adds test files and is last because it depends on the API key.
+Conflicts we expect: none, the three PRs don't touch the same files.
+Done means: on a fresh clone of main, pytest passes and log, history and compare all give real output on the demo repo.
+Closing without merging: none.
+Led by: 陳繹夫
