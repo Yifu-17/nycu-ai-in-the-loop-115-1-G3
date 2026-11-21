@@ -30,10 +30,16 @@ def cmd_init(args) -> None:
     print(f"Watching {len(args.watch)} file(s). Saved to {path}")
 
 
+def cell(text) -> str:
+    # a | or a line break inside a cell breaks the markdown table
+    return str(text).replace("|", "\\|").replace("\r", " ").replace("\n", " ")
+
+
 def as_markdown(entries) -> str:
     lines = ["| Setting | Change | Why | Decided by | Status |", "|---|---|---|---|---|"]
     for e in entries:
-        lines.append(f"| `{e.key}` | {e.old} → {e.new} | {e.why} | {e.decided_by} | {e.status} |")
+        lines.append(f"| `{cell(e.key)}` | {cell(e.old)} → {cell(e.new)} | {cell(e.why)} "
+                     f"| {cell(e.decided_by)} | {cell(e.status)} |")
     return "\n".join(lines)
 
 
