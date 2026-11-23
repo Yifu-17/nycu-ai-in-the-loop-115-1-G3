@@ -45,10 +45,12 @@ Read the steward's plan together. Change the order if someone sees a problem. Th
 
 | Merge # | Driver | Reviewer on screen |
 |---|---|---|
-| 1 | | |
-| 2 | | |
-| 3 | | |
+| 1 | 吳傢澂 | 吳承霖 |
+| 2 | 楊敦傑 | 陳繹夫 |
+| 3 | 吳承霖 | 楊敦傑 |
 | 4 | | |
+
+We kept the steward's order. #19 was not merged today because we still don't have the API key.
 
 ---
 
@@ -64,9 +66,9 @@ For **each** pull request, in plan order:
 
 | # | PR | Conflicts? (where) | How we resolved them | Tests after merge (pass / fail) | App runs on `main`? |
 |---|---|---|---|---|---|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
+| 1 | #18 compare | No | | Fail at first on Windows. Bare `pytest` couldn't import whychanged, and `python -m pytest` gave 18 passed, 1 failed because `bash` ran WSL bash. 吳傢澂 added `pythonpath = .` to pytest.ini and used the bash that ships with git (6d38a5b). Then 19 passed | Yes |
+| 2 | #17 history | No | | After Update branch, the end to end test failed on Windows with the same WSL bash problem. 楊敦傑 used the same fix in test_end_to_end.py. Then 23 passed | Yes, history and compare give real output |
+| 3 | #19 prompt-tests | | | Not merged, waiting for the API key | |
 | 4 | | | | | |
 
 **If something breaks on `main`:** stop merging. Fix it now (one small PR), or revert the last merge (`git revert -m 1 <merge commit>`) and write down why. Do not stack more merges on a broken `main`.
@@ -83,11 +85,11 @@ Someone who is **not** the steward:
 
 | | |
 |---|---|
-| Who did it | |
-| Did the README work without help? (yes / partly / no) | |
-| What was missing from the README? | |
-| Did the main task work end to end? | |
-| Any API key or setup step that only one person knows? | |
+| Who did it | 吳承霖, on Windows |
+| Did the README work without help? (yes / partly / no) | Yes |
+| What was missing from the README? | It only had Mac and Linux commands. We added the Windows ones: use Git Bash, `source .venv/Scripts/activate`, and `python -m pytest` |
+| Did the main task work end to end? | Yes, init, log, history and compare all ran |
+| Any API key or setup step that only one person knows? | No. The tool runs offline without a key. The API key is only needed for the prompt tests in #19 |
 
 Fix small README gaps now. Anything bigger becomes an issue.
 
@@ -97,10 +99,13 @@ Fix small README gaps now. Anything bigger becomes an issue.
 
 **Add the outcome under the steward's merge plan in `DECISIONS.md`:**
 
-> **Outcome ([date]):** merged #__, #__, #__; closed #__ because __. Conflicts in __, resolved by __. Fresh-clone test by __: [worked / worked after fixing __]. `main` is [green / not yet green because __]. Left for after CP2: issues #__, #__.
+> **Outcome (2026-11-23):** merged #18 and #17. #19 is left open until we get the API key. No conflicts. The tests failed on Windows at first, fixed in both PRs before merging. Fresh-clone test by 吳承霖 on Windows: worked. `main` is green, 23 passed. Left for later: #19, issues #15, #21.
 
 **Team check** (honestly, in a line each):
 
 1. What made merging harder than it needed to be? (for example: long-lived branches, big PRs, two people editing the same file)
+   #17 only passed after #18 was merged, and the tests had only been run on Mac, so both PRs failed on Windows.
 2. One habit we will change for Phase 3:
+   Before opening a PR, run pytest on both Windows and Mac, or ask someone on the other system to run it.
 3. Could each of us run the prototype and do the main task without help? If not, who will practise with whom before CP2?
+   Yes. After the Windows fixes everyone ran it on their own laptop.
