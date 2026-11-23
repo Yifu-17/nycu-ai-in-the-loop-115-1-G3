@@ -1,3 +1,5 @@
+import os
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -5,11 +7,14 @@ from whychanged.compare import compare
 from whychanged.models import LogEntry
 
 ROOT = Path(__file__).resolve().parent.parent
+# On Windows a bare "bash" runs System32's WSL bash, so use the bash that ships next to git
+BASH = (next(str(p / "bin" / "bash.exe") for p in Path(shutil.which("git")).parents if (p / "bin" / "bash.exe").exists())
+        if os.name == "nt" else "bash")
 
 
 def test_compare_branches_with_reason(tmp_path):
     repo = str(tmp_path / "lab")
-    subprocess.run(["bash", str(ROOT / "demo" / "make_demo_repo.sh"), repo], check=True, capture_output=True)
+    subprocess.run([BASH, str(ROOT / "demo" / "make_demo_repo.sh"), repo], check=True, capture_output=True)
     logged = LogEntry(key="train.lr", old="0.001", new="0.0005", file="configs/train.yaml",
                       branch="exp/old-lr", commit="x", changed_by="A", decided_by="B",
                       why="loss unstable", ai_draft="", status="confirmed", created_at="2026-11-01")
