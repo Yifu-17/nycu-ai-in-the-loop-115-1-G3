@@ -13,6 +13,13 @@ Project: an automation tool that organizes server logs, capturing the reasoning 
 
 **Section 3 — Disagreements:** If engineers disagree on whether an AI-generated summary is accurate, the code steward decides, based on whether the original author confirms it matches their reasoning, not on seniority or a vote.
 
+## 2026-11-23 — AI Usage Guidelines (updated from CP2)
+We looked at PRs #10 to #20: AI wrote most of the code in all 10, someone other than the author could explain all 10, and 0 of 10 said what the AI did. So we changed three rules from the first draft above.
+1. Old: we won't use AI to write our PR descriptions and DECISIONS.md entries. New: AI can draft code and PR text, but every PR needs a reviewer comment that the author answers in their own words before it's approved. Why: in CP2 AI wrote most of it, and what made it work was that everyone read it, reviewed someone else's PR and connected the pieces.
+2. Old: the PR description notes in one line whether AI was involved. New: every PR fills in the AI assistance section of the PR template, and a PR with it empty doesn't get approved. Why: none of our 10 PRs said what the AI did, and Group 01 pointed this out in the Week 12 review.
+3. Old: prompts that produce an official log entry go in the prompt engineering log. New: a PR that changes the AI's behavior includes CLAUDE.md and the prompt test results from before and after. Why: #12 changed the drafter but left CLAUDE.md out, and it had to be added later in #14.
+Led by: 陳繹夫
+
 ## 2026-09-21 — Draft Evaluation Plan
 
 **Problem grounding:**
