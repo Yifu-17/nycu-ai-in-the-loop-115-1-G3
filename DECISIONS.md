@@ -93,3 +93,5 @@ Conflicts we expect: none, the three PRs don't touch the same files.
 Done means: on a fresh clone of main, pytest passes and log, history and compare all give real output on the demo repo.
 Closing without merging: none.
 Led by: 陳繹夫
+
+Outcome (2026-11-23): merged #18 and #17. #19 is left open until we get the API key. No conflicts. The tests failed on Windows at first: bare `pytest` couldn't import whychanged, and the tests called `bash`, which on Windows runs WSL bash. Fixed in #18 (6d38a5b) and #17 by adding `pythonpath = .` to pytest.ini and using the bash that ships with git. Fresh-clone test by 吳承霖 on Windows: worked, we only added Windows commands to the README. main is green, 23 passed. Left for later: #19, issues #15, #21.
