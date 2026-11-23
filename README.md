@@ -12,6 +12,8 @@ pip install -r requirements.txt
 export ANTHROPIC_API_KEY=...   # optional; without it the tool uses a simple offline draft
 ```
 
+Without a key, or with `WHYCHANGED_OFFLINE=1`, the tool runs in offline mode. It doesn't call any AI. For each changed setting it takes the first line in the commit messages or the note that mentions the setting's name, for example `dropout` for `train.dropout`, and uses that line as the draft. If no line mentions it, the draft is `unknown`. Offline drafts are a rough match, so check them more carefully before you accept. If the AI call fails, the tool also falls back to offline mode and prints a message.
+
 ## Try it on the demo repo (2 people)
 
 ```bash
