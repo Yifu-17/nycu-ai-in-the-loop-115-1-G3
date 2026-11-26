@@ -95,3 +95,11 @@ Closing without merging: none.
 Led by: 陳繹夫
 
 Outcome (2026-11-23): merged #18 and #17. #19 is left open until we get the API key. No conflicts. The tests failed on Windows at first: bare `pytest` couldn't import whychanged, and the tests called `bash`, which on Windows runs WSL bash. Fixed in #18 (6d38a5b) and #17 by adding `pythonpath = .` to pytest.ini and using the bash that ships with git. Fresh-clone test by 吳承霖 on Windows: worked, we only added Windows commands to the README. main is green, 23 passed. Left for later: #19, issues #15, #21.
+
+## 2026-11-26 — Drafter uses Haiku, and two prompt rules from a failed test
+Decision: the drafter's default model is now `claude-haiku-5-5` instead of `claude-opus-5-5`.
+Why: our API budget is $5 until the end of term. Each draft is one short call, and on the first run Haiku passed the same 12 prompt tests as Opus.
+Alternative rejected: keeping Opus. It also passed 12/12, but costs more for a one-line reason.
+
+Haiku passed 12/12 but still wrote "as advised" for E06 and added "to reduce overfitting" for E07, which the input never said. We added E08 to E10 to catch this, and run 2 failed E08 and E09 (13/15). We added two rules to CLAUDE.md: don't add a purpose the text doesn't state, and don't say who suggested or advised the change. Run 3 passed 15/15. Results are in tests/results/.
+Led by: 陳繹夫

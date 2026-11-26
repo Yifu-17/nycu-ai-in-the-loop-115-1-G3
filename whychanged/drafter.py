@@ -16,7 +16,7 @@ from pathlib import Path
 from .models import ChangeContext, Draft, SettingChange
 
 PROMPT_FILE = Path(__file__).resolve().parent.parent / "CLAUDE.md"
-MODEL = os.environ.get("WHYCHANGED_MODEL", "claude-opus-5-5")
+MODEL = os.environ.get("WHYCHANGED_MODEL", "claude-haiku-5-5")
 
 SCHEMA = {
     "type": "object",
