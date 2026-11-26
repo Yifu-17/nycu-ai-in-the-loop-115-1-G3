@@ -7,10 +7,16 @@ When someone changes a watched settings file (e.g. `configs/train.yaml`, `.env.e
 ## Setup
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate        # Mac / Linux
+source .venv/Scripts/activate    # Windows (Git Bash)
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=...   # optional; without it the tool uses a simple offline draft
+export ANTHROPIC_API_KEY=...     # optional; without it the tool uses a simple offline draft
 ```
+
+On Windows, run everything in Git Bash, not PowerShell or WSL. The demo script is a bash script.
+
+Without a key, or with `WHYCHANGED_OFFLINE=1`, the tool runs in offline mode. It doesn't call any AI. For each changed setting it takes the first line in the commit messages or the note that mentions the setting's name, for example `dropout` for `train.dropout`, and uses that line as the draft. If no line mentions it, the draft is `unknown`. Offline drafts are a rough match, so check them more carefully before you accept. If the AI call fails, the tool also falls back to offline mode and prints a message.
 
 ## Try it on the demo repo (2 people)
 
@@ -51,6 +57,6 @@ git diff ─> diff_parser ─> context ─> drafter (Claude) ─> confirm ─> s
 ## Tests
 
 ```bash
-pytest                                  # unit + end-to-end, offline
+python -m pytest                        # unit + end-to-end, offline
 python tests/run_prompt_tests.py        # prompt test suite, calls the API (12 cases)
 ```

@@ -13,6 +13,13 @@ Project: an automation tool that organizes server logs, capturing the reasoning 
 
 **Section 3 — Disagreements:** If engineers disagree on whether an AI-generated summary is accurate, the code steward decides, based on whether the original author confirms it matches their reasoning, not on seniority or a vote.
 
+## 2026-11-23 — AI Usage Guidelines (updated from CP2)
+We looked at PRs #10 to #20: AI wrote most of the code in all 10, someone other than the author could explain all 10, and 0 of 10 said what the AI did. So we changed three rules from the first draft above.
+1. Old: we won't use AI to write our PR descriptions and DECISIONS.md entries. New: AI can draft code and PR text, but every PR needs a reviewer comment that the author answers in their own words before it's approved. Why: in CP2 AI wrote most of it, and what made it work was that everyone read it, reviewed someone else's PR and connected the pieces.
+2. Old: the PR description notes in one line whether AI was involved. New: every PR fills in the AI assistance section of the PR template, and a PR with it empty doesn't get approved. Why: none of our 10 PRs said what the AI did, and Group 01 pointed this out in the Week 12 review.
+3. Old: prompts that produce an official log entry go in the prompt engineering log. New: a PR that changes the AI's behavior includes CLAUDE.md and the prompt test results from before and after. Why: #12 changed the drafter but left CLAUDE.md out, and it had to be added later in #14.
+Led by: 陳繹夫
+
 ## 2026-09-21 — Draft Evaluation Plan
 
 **Problem grounding:**
@@ -64,3 +71,27 @@ Led by: 陳繹夫
 Decision: kept the stubs from #10 so the whole path ran before any real code, then swapped in diff_parser, drafter and confirm/store one PR at a time (#11 to #14). history and compare stay stubs until the next slice.
 Why: every PR could be reviewed and merged on its own, and we could run the demo after each merge to see which piece broke.
 Led by: 陳繹夫
+
+## 2026-11-21 — Steward record for CP2
+Each PR's steward commented, waited for the author's reply, then approved.
+- #10 skeleton by 陳繹夫, steward 吳傢澂
+- #11 diff_parser by 吳傢澂, steward 吳承霖
+- #12 drafter by 吳承霖, steward 楊敦傑
+- #13 confirm and store by 楊敦傑, steward 陳繹夫
+- #14 CLAUDE.md by 吳承霖, steward 楊敦傑
+- #16 markdown table and README by 陳繹夫, steward 吳傢澂
+Led by: 陳繹夫
+
+## 2026-11-23 — Merge plan for merge day
+Open PRs:
+- #18 `jcwu/compare` by 吳傢澂: compare two branches with logged reasons. Ready. Only touches compare.py and its test.
+- #17 `tcyang/history` by 楊敦傑: setting history and an end to end test. Ready, but its end to end test needs compare, so it only passes after #18 compare is merged. Only touches history.py and its tests.
+- #19 `clwu/prompt-tests` by 吳承霖: 12 prompt test cases and the runner. Ready only if it has real API results. Only touches files in tests/.
+
+Order: #18 compare, then #17 history, then #19 prompt-tests. history's end to end test runs compare, so compare goes first. prompt-tests only adds test files and is last because it depends on the API key.
+Conflicts we expect: none, the three PRs don't touch the same files.
+Done means: on a fresh clone of main, pytest passes and log, history and compare all give real output on the demo repo.
+Closing without merging: none.
+Led by: 陳繹夫
+
+Outcome (2026-11-23): merged #18 and #17. #19 is left open until we get the API key. No conflicts. The tests failed on Windows at first: bare `pytest` couldn't import whychanged, and the tests called `bash`, which on Windows runs WSL bash. Fixed in #18 (6d38a5b) and #17 by adding `pythonpath = .` to pytest.ini and using the bash that ships with git. Fresh-clone test by 吳承霖 on Windows: worked, we only added Windows commands to the README. main is green, 23 passed. Left for later: #19, issues #15, #21.
