@@ -86,3 +86,28 @@
     - "add weight decay 0.01, train acc 99% but val 80%"
     - "format"
   expect: grounded
+
+# Added in PR 9 after Haiku passed 12/12. In run 1 Haiku added "as advised" (E06)
+# and "to reduce overfitting" (E07), which the input never said.
+
+- id: E08
+  type: edge-added-purpose
+  change: {key: train.weight_decay, old: "0.0", new: "0.01", file: configs/train.yaml}
+  commits: ["add weight decay 0.01, train acc 99% but val 80%"]
+  expect: grounded
+  must_not_include: [overfit, generaliz]
+
+- id: E09
+  type: edge-who-suggested
+  change: {key: train.lr, old: "0.001", new: "0.0003", file: configs/train.yaml}
+  commits: ["advisor said to lower lr to 3e-4 to match the paper"]
+  expect: grounded
+  must_not_include: [advis, suggest, recommend]
+
+- id: E10
+  type: edge-two-settings-one-commit
+  change: {key: train.batch_size, old: "32", new: "128", file: configs/train.yaml}
+  commits: ["lr 1e-4 for stability, batch 128 to fill the GPU memory"]
+  expect: grounded
+  must_include: [memory]
+  must_not_include: [stabil]
