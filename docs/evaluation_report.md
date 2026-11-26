@@ -14,7 +14,7 @@ We haven't measured either one yet. This report lists what we have so far and wh
 
 | Evidence | What we did | What we found |
 |---|---|---|
-| Problem interviews (CP1) | 2 interviews: a course team at NTOU and an NLP lab at NYCU | Both teams lost time finding why a setting changed. One spent two evenings diffing branches, the other about an hour on unsynced environment variables. Both wanted to know who decided, not only who changed it. Their concerns were made-up reasons, the author having to confirm, and sending unpublished research to an outside AI |
+| Problem interviews (CP1) | 2 interviews: a course team at NTOU and an NLP lab at NYCU | Both teams lost time finding why a setting changed. One spent two evenings diffing branches, the other about an hour on unsynced environment variables. Neither could tell who decided a change. Interviewee 1 worried about made-up reasons, the extra step for the author, and sending unpublished research to an outside AI |
 | Automated tests | `python -m pytest`, 23 tests, including an end to end test that runs init, log, history and compare on the demo repo | All pass on main, on Mac and on Windows |
 | Walking skeleton (11/21) | All four of us connected the real modules and ran the demo after each merge | The main path works end to end. It also showed CLAUDE.md was missing from the drafter PR, fixed in #14 |
 | Merge day (11/23) | Merged #18 and #17 one at a time, then a fresh clone on Windows following only the README | Works after fixing two Windows test problems. The README was enough, but it only had Mac commands, so we added Windows ones |
