@@ -27,7 +27,7 @@ This page lists our main design decisions, what shaped each one, and what our tw
 
 ## User tests
 
-Two first-year master's students at NYCU, outside our team, on 2026-11-26. Each test was about 20 minutes on our laptop with the demo repo and the real AI drafter. They typed the commands themselves. Task 1: log the reasons for two changed settings as the author. Task 2: weeks later, find why settings differ between two branches using `history` and `compare`.
+Two first-year master's students at NYCU, outside our team, on 2026-11-26. One of them is the NLP lab student we interviewed in CP1. Each test was about 20 minutes on our laptop with the demo repo and the real AI drafter. They typed the commands themselves. Task 1: log the reasons for two changed settings as the author. Task 2: weeks later, find why settings differ between two branches using `history` and `compare`.
 
 | | Tester 1 | Tester 2 |
 |---|---|---|
@@ -49,4 +49,4 @@ What we learned:
 
 ## Limits
 
-Two testers is a small sample, and both used our demo repo, not their own. We wrote down what they said, not numbers, so we still need to measure accepted drafts and lookup time, ideally in a lab's own repo.
+Two testers is a small sample, and both used our demo repo, not their own. We wrote down what they said, not numbers, so we still need to measure accepted drafts and lookup time on their own data.
