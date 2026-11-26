@@ -2,7 +2,7 @@
 
   ANTHROPIC_API_KEY=... python tests/run_prompt_tests.py [--out tests/results/run1.md]
 
-This calls the API once per case (12 calls). It does not run under pytest.
+This calls the API once per case. It does not run under pytest.
 """
 import argparse
 import sys

@@ -58,5 +58,5 @@ git diff ─> diff_parser ─> context ─> drafter (Claude) ─> confirm ─> s
 
 ```bash
 python -m pytest                        # unit + end-to-end, offline
-python tests/run_prompt_tests.py        # prompt test suite, calls the API (12 cases)
+python tests/run_prompt_tests.py        # prompt test suite, calls the API (15 cases)
 ```

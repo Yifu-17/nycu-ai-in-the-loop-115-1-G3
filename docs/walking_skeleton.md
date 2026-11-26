@@ -78,7 +78,7 @@ We didn't use one skeleton branch. Each person opened their own PR to main and w
 | Piece | Built by | Explained by | Connected? | What we had to fix at the connection |
 |---|---|---|---|---|
 | diff_parser | 吳傢澂 | 吳承霖 | yes | nothing |
-| drafter | 吳承霖 | 楊敦傑 | with a fix | CLAUDE.md didn't get committed in #12. The drafter needs it as the system prompt, otherwise a real API call fails and it just goes back to offline without telling anyone. 吳承霖 added it in #14. |
+| drafter | 吳承霖 | 楊敦傑 | with a fix | CLAUDE.md didn't get committed in #12. The drafter needs it as the system prompt, otherwise a real API call fails and it goes back to offline with only a one-line message. 吳承霖 added it in #14. |
 | confirm and store | 楊敦傑 | 陳繹夫 | yes | nothing |
 
 Where it first ran end to end:

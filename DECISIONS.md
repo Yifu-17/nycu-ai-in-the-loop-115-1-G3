@@ -105,7 +105,7 @@ Haiku passed 12/12 but still wrote "as advised" for E06 and added "to reduce ove
 Led by: 陳繹夫
 
 ## 2026-11-26 — User tests: keep the CLI for now, make it simpler in Phase 3
-Two first-year master's students at NYCU, outside our team, tried the tool on the demo repo. Both liked the idea and would try it, and both found the CLI commands hard. One asked why a draft was "unknown".
+Two first-year master's students at NYCU, outside our team, tried the tool on the demo repo. One of them is the NLP lab student we interviewed in CP1. Both liked the idea and would try it, and both found the CLI commands hard. One asked why a draft was "unknown".
 Decision: keep the CLI for CP2, and in Phase 3 shorten the commands (no `--repo`, defaults for `log`) and show why a draft is unknown, before building any UI.
 Why: the core works and both testers understood it. The problem is how many options you have to type, which we can fix without a UI.
 Alternative rejected: starting a UI now, which is too big before CP2 and needs its own testing.
